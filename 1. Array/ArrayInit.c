@@ -43,6 +43,7 @@ void arrayInit(Array *array, int size, int typeSize){
     if (p == NULL){
         return;
     }
+    
     array->p = p;
     array->len = 0;
     array->size = size;
