@@ -1,6 +1,6 @@
 /**
  * @file ArrayInit.c
- * @author l3vi4th4n (k3lpi3b4nsh33@dnmx.org)
+ * @author l3vi4th4n (kelpie@skiff.com)
  * @brief 
  * @version 0.1
  * @date 2023-03-21
@@ -43,7 +43,7 @@ void arrayInit(Array *array, int size, int typeSize){
     if (p == NULL){
         return;
     }
-    
+
     array->p = p;
     array->len = 0;
     array->size = size;
