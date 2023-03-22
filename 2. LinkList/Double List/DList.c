@@ -64,19 +64,20 @@ int dlist_insert_head(stDlistHead_P dlist, stDlistNode *pNode, int data){
     return 0;
 }
 
-stDlistNode *dlist_remove_tail(stDlistHead_P dlist){
+void dlist_remove_tail(stDlistHead_P dlist){
     stDlistNode *pNode = NULL;
 
 	if(dlist->size == 0)
 	{
-		return NULL;
+		return;
 	}
 
     pNode = dlist->tail;
 	if(dlist->size > 1)
 	{
-		dlist->tail = dlist->tail->prev;
-		dlist->tail->next = NULL;
+		pNode = dlist->tail->prev;
+		pNode = NULL;
+        free(pNode);
 	}
 	else
 	{
@@ -84,12 +85,7 @@ stDlistNode *dlist_remove_tail(stDlistHead_P dlist){
 		dlist->tail = NULL;
 	}
 	dlist->size--;
-
-    if(pNode == dlist->tail){
-        return pNode;
-    } else {
-        return NULL;
-    }
+    return;
 	
 }
 
@@ -144,7 +140,7 @@ void Lru_dlist(stDlistHead_P dlist, int data){
         dlist_remove_node(dlist, pNode);
     } 
     else if(dlist->size >= 4){
-        pNode = dlist_remove_tail(dlist);
+        dlist_remove_tail(dlist);
     }
     dlist_insert_head(dlist, pNode, data);
     return;
@@ -163,11 +159,6 @@ int main(){
 
     dlist_dump(&dlist);
 
-    pNode = dlist_remove_tail(&dlist);
-    if(pNode != NULL){
-        printf("\r\n remove %d", pNode->data);
-    }
-
     dlist_insert_head(&dlist, pNode, 4);
     dlist_dump(&dlist);
 
@@ -182,13 +173,9 @@ int main(){
 
     while(dlist.size > 0)
 	{
-	    pNode = dlist_remove_tail(&dlist);
-	    if(pNode != NULL)
-	    { 
-		    printf("\r\n remove %d",pNode->data);
-	    	free (pNode);
-    	}
+	    dlist_remove_tail(&dlist);
 	}
+    printf("\r\nDelete ALL DLIST!\n");
 
 	return 0;
 }
