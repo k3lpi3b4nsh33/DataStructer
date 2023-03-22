@@ -25,4 +25,4 @@ typedef struct Dlisthead{
     int size;
     stDlistNode *head;
     stDlistNode *tail;
-} stDlistHead;
+} stDlistHead, *stDlistHead_P ;
