@@ -3,22 +3,26 @@
 #include <stdbool.h>
 
 /* Definition for singly-linked list. */
-struct ListNode {
+struct ListNode
+{
     int val;
     struct ListNode *next;
 };
 
 /* Function to check if a linked list is palindrome. */
-bool isPalindrome(struct ListNode* head) {
+bool isPalindrome(struct ListNode *head)
+{
     /* Check for empty list or single node list. */
-    if (head == NULL || head->next == NULL) {
+    if (head == NULL || head->next == NULL)
+    {
         return true;
     }
 
     /* Find the middle node of the linked list. */
     struct ListNode *slow = head;
     struct ListNode *fast = head;
-    while (fast->next != NULL && fast->next->next != NULL) {
+    while (fast->next != NULL && fast->next->next != NULL)
+    {
         slow = slow->next;
         fast = fast->next->next;
     }
@@ -27,7 +31,8 @@ bool isPalindrome(struct ListNode* head) {
     struct ListNode *prev = NULL;
     struct ListNode *curr = slow->next;
     struct ListNode *next;
-    while (curr != NULL) {
+    while (curr != NULL)
+    {
         next = curr->next;
         curr->next = prev;
         prev = curr;
@@ -38,8 +43,10 @@ bool isPalindrome(struct ListNode* head) {
     /* Compare the first half with the reversed second half. */
     struct ListNode *p1 = head;
     struct ListNode *p2 = slow->next;
-    while (p2 != NULL) {
-        if (p1->val != p2->val) {
+    while (p2 != NULL)
+    {
+        if (p1->val != p2->val)
+        {
             return false;
         }
         p1 = p1->next;
@@ -50,7 +57,8 @@ bool isPalindrome(struct ListNode* head) {
 }
 
 /* Test function */
-int main() {
+int main()
+{
     /* Create linked list: 1 -> 2 -> 3 -> 2 -> 1 */
     struct ListNode *head = (ListNode *)malloc(sizeof(struct ListNode));
     head->val = 1;
@@ -70,7 +78,8 @@ int main() {
 
     /* Free the memory used by the linked list */
     struct ListNode *temp;
-    while (head != NULL) {
+    while (head != NULL)
+    {
         temp = head;
         head = head->next;
         free(temp);
